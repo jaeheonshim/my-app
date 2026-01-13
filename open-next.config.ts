@@ -1,9 +1,17 @@
-import { defineCloudflareConfig } from "@opennextjs/cloudflare";
+// open-next.config.ts
+import r2IncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/r2-incremental-cache";
 
-				export default defineCloudflareConfig({
-				// Uncomment to enable R2 cache,
-				// It should be imported as:
-				// `import r2IncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/r2-incremental-cache";`
-				// See https://opennext.js.org/cloudflare/caching for more details
-				// incrementalCache: r2IncrementalCache,
-				});
+const config = {
+  default: {
+    build: {
+      // This is the specific fix for the 'setImmediate' error
+      alias: {
+        "node:timers/promises": "node:timers/promises",
+      },
+    },
+  },
+  // If you want to keep your Cloudflare overrides (like R2)
+  incrementalCache: r2IncrementalCache,
+};
+
+export default config;
