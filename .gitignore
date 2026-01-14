@@ -49,4 +49,5 @@ next-env.d.ts
 !.env.example
 # OpenNext
 .open-next# OpenNext
+.open-next# OpenNext
 .open-next
